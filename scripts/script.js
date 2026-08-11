@@ -1,88 +1,129 @@
-const openBtn = document.getElementById('openMenu');
-const closeBtn = document.getElementById('closeMenu');
+// ============================================
+// MENU MOBILE OVERLAY
+// ============================================
+const openBtn    = document.getElementById('openMenu');
+const closeBtn   = document.getElementById('closeMenu');
 const menuOverlay = document.getElementById('menuOverlay');
-const navLinks = document.querySelectorAll('#menuOverlay .nav-link');
+const overlayLinks = document.querySelectorAll('#menuOverlay .overlay-link');
 
-menuOverlay.classList.add('inactive'); 
-
-openBtn.addEventListener('click', () => {
+function openMenu() {
   menuOverlay.classList.add('active');
   menuOverlay.classList.remove('inactive');
-});
+  document.body.style.overflow = 'hidden';
+}
 
-closeBtn.addEventListener('click', () => {
+function closeMenu() {
   menuOverlay.classList.remove('active');
   menuOverlay.classList.add('inactive');
-});
+  document.body.style.overflow = '';
+}
 
-navLinks.forEach(link => {
-  link.addEventListener('click', () => {
-    menuOverlay.classList.remove('active');
-    menuOverlay.classList.add('inactive');
+openBtn.addEventListener('click', openMenu);
+closeBtn.addEventListener('click', closeMenu);
+overlayLinks.forEach(link => link.addEventListener('click', closeMenu));
+
+// ============================================
+// NEUTRALIZA interferência do Bootstrap nos modais
+// Bootstrap 5 injeta overflow:hidden e padding-right inline no body
+// ao abrir modais — isso cria scrollbar duplo. Removemos via evento.
+// ============================================
+document.addEventListener('show.bs.modal', () => {
+  // Aguarda o Bootstrap aplicar os estilos e sobrescreve imediatamente
+  const observer = new MutationObserver(() => {
+    document.body.style.setProperty('overflow', 'visible', 'important');
+    document.body.style.setProperty('padding-right', '0px', 'important');
   });
+  observer.observe(document.body, { attributes: true, attributeFilter: ['style'] });
+  // Para de observar após 300ms (tempo suficiente para o modal abrir)
+  setTimeout(() => observer.disconnect(), 300);
 });
 
-const debounce = function (func, wait, immediate) {
+document.addEventListener('hidden.bs.modal', () => {
+  document.body.style.removeProperty('overflow');
+  document.body.style.removeProperty('padding-right');
+});
+
+// ============================================
+// AOS INIT
+// ============================================
+AOS.init({ once: true, offset: 60 });
+
+// ============================================
+// NAVBAR — scroll shrink sutil
+// ============================================
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('mainNav');
+  if (window.scrollY > 40) {
+    nav.style.background = 'rgba(10, 10, 15, 0.97)';
+  } else {
+    nav.style.background = 'rgba(10, 10, 15, 0.85)';
+  }
+});
+
+// ============================================
+// TRAJETÓRIA — carrossel mobile com dots
+// ============================================
+function debounce(func, wait) {
   let timeout;
   return function (...args) {
-    const context = this;
-    const later = function () {
-      timeout = null;
-      if (!immediate) func.apply(context, args);
-    };
-    const callNow = immediate && !timeout;
     clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-    if (callNow) func.apply(context, args);
+    timeout = setTimeout(() => func.apply(this, args), wait);
   };
-};
+}
 
-AOS.init();
-
-// Carrossel - Trajetória
-document.addEventListener("DOMContentLoaded", () => {
-  const cards = document.querySelectorAll(".trajetoria-card");
-  const dotsContainer = document.querySelector(".dots-container");
-  if (!dotsContainer) return; // Segurança caso o container não exista
+document.addEventListener('DOMContentLoaded', () => {
+  const cards = document.querySelectorAll('.trajetoria-card');
+  const dotsContainer = document.querySelector('.dots-container');
+  if (!dotsContainer || !cards.length) return;
 
   let currentIndex = 0;
 
-  // Cria os dots dinamicamente conforme número de cards
   cards.forEach((_, i) => {
-    const dot = document.createElement("div");
-    dot.classList.add("dot");
-    if (i === 0) dot.classList.add("active");
-    dot.addEventListener("click", () => {
+    const dot = document.createElement('div');
+    dot.classList.add('dot');
+    if (i === 0) dot.classList.add('active');
+    dot.setAttribute('aria-label', `Card ${i + 1}`);
+    dot.addEventListener('click', () => {
       currentIndex = i;
       updateCarousel();
     });
     dotsContainer.appendChild(dot);
   });
 
-  const dots = dotsContainer.querySelectorAll(".dot");
+  const dots = dotsContainer.querySelectorAll('.dot');
 
   function updateCarousel() {
-    cards.forEach((card, i) => {
-      card.classList.toggle("active", i === currentIndex);
-    });
-    dots.forEach((dot, i) => {
-      dot.classList.toggle("active", i === currentIndex);
-    });
+    cards.forEach((card, i) => card.classList.toggle('active', i === currentIndex));
+    dots.forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
   }
 
   function checkViewport() {
     if (window.innerWidth <= 767) {
-      currentIndex = 0;  // Reseta para o primeiro card no modo mobile
+      if (currentIndex >= cards.length) currentIndex = 0;
       updateCarousel();
-      dotsContainer.style.display = "flex";
     } else {
-      // Desktop: mostrar todos os cards
-      cards.forEach(card => card.classList.add("active"));
-      dotsContainer.style.display = "none";
+      cards.forEach(card => {
+        card.classList.add('active');
+        card.style.opacity = '1';
+      });
     }
   }
 
-  window.addEventListener("resize", debounce(checkViewport, 150));
-
+  window.addEventListener('resize', debounce(checkViewport, 150));
   checkViewport();
+
+  // Swipe mobile
+  let touchStartX = 0;
+  dotsContainer.parentElement.addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  dotsContainer.parentElement.addEventListener('touchend', e => {
+    const diff = touchStartX - e.changedTouches[0].screenX;
+    if (Math.abs(diff) > 40) {
+      if (diff > 0 && currentIndex < cards.length - 1) currentIndex++;
+      else if (diff < 0 && currentIndex > 0) currentIndex--;
+      updateCarousel();
+    }
+  }, { passive: true });
 });
