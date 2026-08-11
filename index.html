@@ -29,14 +29,27 @@
         <span class="hamburger__line"></span>
       </button>
 
-      <div class="collapse navbar-collapse d-none d-md-flex justify-content-end">
+      <div class="collapse navbar-collapse d-none d-md-flex justify-content-end align-items-center gap-3">
         <ul class="navbar-nav flex-row nav-lista">
-          <li class="nav-item mx-2"><a class="nav-link-custom" href="#sobre">Sobre</a></li>
-          <li class="nav-item mx-2"><a class="nav-link-custom" href="#trajetoria">Trajetória</a></li>
-          <li class="nav-item mx-2"><a class="nav-link-custom" href="#habilidades">Habilidades</a></li>
-          <li class="nav-item mx-2"><a class="nav-link-custom" href="#projetos">Projetos</a></li>
-          <li class="nav-item mx-2"><a class="nav-link-custom" href="#contato">Contato</a></li>
+          <li class="nav-item mx-2"><a class="nav-link-custom" href="#sobre"       data-i18n="nav.sobre">Sobre</a></li>
+          <li class="nav-item mx-2"><a class="nav-link-custom" href="#trajetoria"  data-i18n="nav.trajetoria">Trajetória</a></li>
+          <li class="nav-item mx-2"><a class="nav-link-custom" href="#habilidades" data-i18n="nav.habilidades">Habilidades</a></li>
+          <li class="nav-item mx-2"><a class="nav-link-custom" href="#projetos"    data-i18n="nav.projetos">Projetos</a></li>
+          <li class="nav-item mx-2"><a class="nav-link-custom" href="#contato"     data-i18n="nav.contato">Contato</a></li>
         </ul>
+        <!-- Seletor de idioma -->
+        <div class="lang-switcher" id="langSwitcher">
+          <button class="lang-btn" id="langBtn" aria-label="Selecionar idioma" aria-expanded="false">
+            <span class="lang-flag" id="langFlag">🇧🇷</span>
+            <span class="lang-code" id="langCode">PT</span>
+            <i class="bi bi-chevron-down lang-chevron" id="langChevron"></i>
+          </button>
+          <div class="lang-dropdown" id="langDropdown">
+            <button class="lang-option lang-option--active" data-lang="pt"><span>🇧🇷</span> Português</button>
+            <button class="lang-option" data-lang="en"><span>🇺🇸</span> English</button>
+            <button class="lang-option" data-lang="es"><span>🇪🇸</span> Español</button>
+          </div>
+        </div>
       </div>
     </div>
   </nav>
@@ -56,11 +69,21 @@
       </div>
 
       <nav class="menu-drawer__nav">
-        <a href="#sobre"       class="overlay-link" data-num="01">Sobre</a>
-        <a href="#trajetoria"  class="overlay-link" data-num="02">Trajetória</a>
-        <a href="#habilidades" class="overlay-link" data-num="03">Habilidades</a>
-        <a href="#projetos"    class="overlay-link" data-num="04">Projetos</a>
-        <a href="#contato"     class="overlay-link" data-num="05">Contato</a>
+        <a href="#sobre"       class="overlay-link" data-num="01" data-i18n="nav.sobre">Sobre</a>
+        <a href="#trajetoria"  class="overlay-link" data-num="02" data-i18n="nav.trajetoria">Trajetória</a>
+        <a href="#habilidades" class="overlay-link" data-num="03" data-i18n="nav.habilidades">Habilidades</a>
+        <a href="#projetos"    class="overlay-link" data-num="04" data-i18n="nav.projetos">Projetos</a>
+        <a href="#contato"     class="overlay-link" data-num="05" data-i18n="nav.contato">Contato</a>
+
+        <!-- Seletor de idioma abaixo de Contato -->
+        <div class="lang-mobile-group">
+          <span class="lang-mobile-label" data-i18n="lang.label">Idioma</span>
+          <div class="lang-mobile-options">
+            <button class="lang-mobile-item" data-lang="pt"><span class="lang-mobile-flag">🇧🇷</span><span class="lang-mobile-name">Português</span></button>
+            <button class="lang-mobile-item" data-lang="en"><span class="lang-mobile-flag">🇺🇸</span><span class="lang-mobile-name">English</span></button>
+            <button class="lang-mobile-item" data-lang="es"><span class="lang-mobile-flag">🇪🇸</span><span class="lang-mobile-name">Español</span></button>
+          </div>
+        </div>
       </nav>
 
       <div class="menu-drawer__footer">
@@ -82,16 +105,16 @@
 
         <div class="col-12 col-lg-7" data-aos="fade-right" data-aos-duration="900">
           <div class="badge-qa mb-4">
-            <i class="bi bi-patch-check-fill me-2"></i>QA Manual · Front-end Developer
+            <i class="bi bi-patch-check-fill me-2"></i><span data-i18n="hero.badge">QA Manual · Front-end Developer</span>
           </div>
           <h1 class="hero-title">Lucas<br><span class="hero-accent">Straub</span></h1>
-          <p class="hero-subtitle">
+          <p class="hero-subtitle" data-i18n="hero.subtitle">
             Garanto a qualidade do que é entregue ao usuário com testes manuais minuciosos,
             olhar crítico sobre cada fluxo e experiência real de desenvolvimento front-end.
           </p>
           <div class="hero-ctas">
-            <a href="#contato" class="btn btn-primary-custom">Falar comigo <i class="bi bi-arrow-right ms-1"></i></a>
-            <a href="#projetos" class="btn btn-outline-custom">Ver projetos</a>
+            <a href="#contato" class="btn btn-primary-custom"><span data-i18n="hero.cta1">Falar comigo</span> <i class="bi bi-arrow-right ms-1"></i></a>
+            <a href="#projetos" class="btn btn-outline-custom" data-i18n="hero.cta2">Ver projetos</a>
           </div>
         </div>
 
@@ -121,16 +144,16 @@
         <div class="col-12 col-md-4" data-aos="fade-up" data-aos-duration="700">
           <div class="sobre-card sobre-card--primary">
             <div class="sobre-card__icon"><i class="bi bi-shield-check"></i></div>
-            <h3 class="sobre-card__title">QA Manual</h3>
-            <p class="sobre-card__text">
+            <h3 class="sobre-card__title" data-i18n="sobre.qa.title">QA Manual</h3>
+            <p class="sobre-card__text" data-i18n="sobre.qa.text">
               Criação e execução de casos de teste, reporte detalhado de bugs, testes exploratórios,
               regressão e validação de fluxos críticos em ambientes web.
             </p>
             <div class="sobre-card__tags">
-              <span>Casos de teste</span>
-              <span>Bug report</span>
-              <span>Regressão</span>
-              <span>Exploratório</span>
+              <span data-i18n="sobre.qa.t1">Casos de teste</span>
+              <span data-i18n="sobre.qa.t2">Bug report</span>
+              <span data-i18n="sobre.qa.t3">Regressão</span>
+              <span data-i18n="sobre.qa.t4">Exploratório</span>
               <span>Cypress</span>
             </div>
           </div>
@@ -139,8 +162,8 @@
         <div class="col-12 col-md-4" data-aos="fade-up" data-aos-duration="700" data-aos-delay="100">
           <div class="sobre-card">
             <div class="sobre-card__icon sobre-card__icon--secondary"><i class="bi bi-code-slash"></i></div>
-            <h3 class="sobre-card__title">Front-end</h3>
-            <p class="sobre-card__text">
+            <h3 class="sobre-card__title" data-i18n="sobre.fe.title">Front-end</h3>
+            <p class="sobre-card__text" data-i18n="sobre.fe.text">
               Desenvolvimento de interfaces responsivas com HTML, CSS, JavaScript e Vue.js,
               sempre com atenção à experiência do usuário e boas práticas de código.
             </p>
@@ -156,16 +179,14 @@
         <div class="col-12 col-md-4" data-aos="fade-up" data-aos-duration="700" data-aos-delay="200">
           <div class="sobre-card">
             <div class="sobre-card__icon sobre-card__icon--secondary"><i class="bi bi-layers"></i></div>
-            <h3 class="sobre-card__title">Metodologias</h3>
-            <p class="sobre-card__text">
+            <h3 class="sobre-card__title" data-i18n="sobre.met.title">Metodologias</h3>
+            <p class="sobre-card__text" data-i18n="sobre.met.text">
               Experiência com times ágeis em Scrum e Kanban. Gestão de tarefas, controle de cronograma
               e colaboração constante entre QA e desenvolvimento.
             </p>
             <div class="sobre-card__tags">
-              <span>Scrum</span>
-              <span>Kanban</span>
-              <span>Taiga</span>
-              <span>Gestão ágil</span>
+              <span>Scrum</span><span>Kanban</span><span>Taiga</span>
+              <span data-i18n="sobre.met.t1">Gestão ágil</span>
             </div>
           </div>
         </div>
@@ -178,8 +199,8 @@
   <section class="section-trajetoria" id="trajetoria">
     <div class="container">
       <div class="section-header" data-aos="fade-up" data-aos-duration="700">
-        <span class="section-label">Minha história</span>
-        <h2 class="section-title">Trajetória</h2>
+        <span class="section-label" data-i18n="traj.label">Minha história</span>
+        <h2 class="section-title" data-i18n="traj.title">Trajetória</h2>
       </div>
 
       <div class="traj-scroll-wrapper" id="trajScroll">
@@ -191,8 +212,8 @@
                 <img src="./assets/trajetoria/marinha.png" class="img-fluid" alt="Marinha do Brasil">
               </div>
               <div class="traj-card__body">
-                <h5 class="traj-card__title">Marinha do Brasil</h5>
-                <span class="traj-card__hint">Ver mais <i class="bi bi-arrow-right"></i></span>
+                <h5 class="traj-card__title" data-i18n="traj.marinha.name">Marinha do Brasil</h5>
+                <span class="traj-card__hint" data-i18n="traj.seemore">Ver mais <i class="bi bi-arrow-right"></i></span>
               </div>
             </div>
           </div>
@@ -204,7 +225,7 @@
               </div>
               <div class="traj-card__body">
                 <h5 class="traj-card__title">Coppead UFRJ</h5>
-                <span class="traj-card__hint">Ver mais <i class="bi bi-arrow-right"></i></span>
+                <span class="traj-card__hint" data-i18n="traj.seemore">Ver mais <i class="bi bi-arrow-right"></i></span>
               </div>
             </div>
           </div>
@@ -216,7 +237,7 @@
               </div>
               <div class="traj-card__body">
                 <h5 class="traj-card__title">Interligados</h5>
-                <span class="traj-card__hint">Ver mais <i class="bi bi-arrow-right"></i></span>
+                <span class="traj-card__hint" data-i18n="traj.seemore">Ver mais <i class="bi bi-arrow-right"></i></span>
               </div>
             </div>
           </div>
@@ -228,8 +249,8 @@
               </div>
               <div class="traj-card__body">
                 <h5 class="traj-card__title">InEvent</h5>
-                <span class="traj-card__badge">QA Júnior · Atual</span>
-                <span class="traj-card__hint">Ver mais <i class="bi bi-arrow-right"></i></span>
+                <span class="traj-card__badge" data-i18n="traj.inevent.badge">QA Júnior · Atual</span>
+                <span class="traj-card__hint" data-i18n="traj.seemore">Ver mais <i class="bi bi-arrow-right"></i></span>
               </div>
             </div>
           </div>
@@ -245,22 +266,22 @@
   <section class="section-habilidades" id="habilidades">
     <div class="container">
       <div class="section-header" data-aos="fade-up" data-aos-duration="700">
-        <span class="section-label">O que eu uso</span>
-        <h2 class="section-title">Habilidades</h2>
+        <span class="section-label" data-i18n="hab.label">O que eu uso</span>
+        <h2 class="section-title" data-i18n="hab.title">Habilidades</h2>
       </div>
     </div>
 
     <div class="carousel-container" aria-label="Carrossel de habilidades">
       <div class="carousel-track">
         <!-- QA Manual em destaque -->
-        <div class="skill-chip skill-chip--qa"><i class="bi bi-clipboard2-check"></i><span>Casos de Teste</span></div>
-        <div class="skill-chip skill-chip--qa"><i class="bi bi-bug"></i><span>Bug Report</span></div>
-        <div class="skill-chip skill-chip--qa"><i class="bi bi-globe2"></i><span>Teste Web</span></div>
-        <div class="skill-chip skill-chip--qa"><i class="bi bi-phone"></i><span>Teste Mobile</span></div>
-        <div class="skill-chip skill-chip--qa"><i class="bi bi-apple"></i><span>Teste iOS</span></div>
-        <div class="skill-chip skill-chip--qa"><i class="bi bi-arrow-repeat"></i><span>Regressão</span></div>
-        <div class="skill-chip skill-chip--qa"><i class="bi bi-search"></i><span>Exploratório</span></div>
-        <div class="skill-chip skill-chip--qa"><i class="bi bi-kanban"></i><span>Scrum / Kanban</span></div>
+        <div class="skill-chip skill-chip--qa"><i class="bi bi-clipboard2-check"></i><span data-i18n="skill.testcases">Casos de Teste</span></div>
+        <div class="skill-chip skill-chip--qa"><i class="bi bi-bug"></i><span data-i18n="skill.bugreport">Bug Report</span></div>
+        <div class="skill-chip skill-chip--qa"><i class="bi bi-globe2"></i><span data-i18n="skill.testweb">Teste Web</span></div>
+        <div class="skill-chip skill-chip--qa"><i class="bi bi-phone"></i><span data-i18n="skill.testmobile">Teste Mobile</span></div>
+        <div class="skill-chip skill-chip--qa"><i class="bi bi-apple"></i><span data-i18n="skill.testios">Teste iOS</span></div>
+        <div class="skill-chip skill-chip--qa"><i class="bi bi-arrow-repeat"></i><span data-i18n="skill.regression">Regressão</span></div>
+        <div class="skill-chip skill-chip--qa"><i class="bi bi-search"></i><span data-i18n="skill.exploratory">Exploratório</span></div>
+        <div class="skill-chip skill-chip--qa"><i class="bi bi-kanban"></i><span data-i18n="skill.agile">Scrum / Kanban</span></div>
         <!-- Front-end -->
         <div class="skill-chip"><img src="./assets/habilidades/html.png" alt="HTML5" /><span>HTML5</span></div>
         <div class="skill-chip"><img src="./assets/habilidades/css.png" alt="CSS3" /><span>CSS3</span></div>
@@ -271,14 +292,14 @@
         <div class="skill-chip"><img src="./assets/habilidades/nodejs-icon.webp" alt="Node.js" /><span>Node.js</span></div>
         <div class="skill-chip"><img src="./assets/habilidades/bd.png" alt="Banco de Dados" /><span>SQL/BD</span></div>
         <!-- duplicado para loop suave -->
-        <div class="skill-chip skill-chip--qa" aria-hidden="true"><i class="bi bi-clipboard2-check"></i><span>Casos de Teste</span></div>
-        <div class="skill-chip skill-chip--qa" aria-hidden="true"><i class="bi bi-bug"></i><span>Bug Report</span></div>
-        <div class="skill-chip skill-chip--qa" aria-hidden="true"><i class="bi bi-globe2"></i><span>Teste Web</span></div>
-        <div class="skill-chip skill-chip--qa" aria-hidden="true"><i class="bi bi-phone"></i><span>Teste Mobile</span></div>
-        <div class="skill-chip skill-chip--qa" aria-hidden="true"><i class="bi bi-apple"></i><span>Teste iOS</span></div>
-        <div class="skill-chip skill-chip--qa" aria-hidden="true"><i class="bi bi-arrow-repeat"></i><span>Regressão</span></div>
-        <div class="skill-chip skill-chip--qa" aria-hidden="true"><i class="bi bi-search"></i><span>Exploratório</span></div>
-        <div class="skill-chip skill-chip--qa" aria-hidden="true"><i class="bi bi-kanban"></i><span>Scrum / Kanban</span></div>
+        <div class="skill-chip skill-chip--qa" aria-hidden="true"><i class="bi bi-clipboard2-check"></i><span data-i18n="skill.testcases">Casos de Teste</span></div>
+        <div class="skill-chip skill-chip--qa" aria-hidden="true"><i class="bi bi-bug"></i><span data-i18n="skill.bugreport">Bug Report</span></div>
+        <div class="skill-chip skill-chip--qa" aria-hidden="true"><i class="bi bi-globe2"></i><span data-i18n="skill.testweb">Teste Web</span></div>
+        <div class="skill-chip skill-chip--qa" aria-hidden="true"><i class="bi bi-phone"></i><span data-i18n="skill.testmobile">Teste Mobile</span></div>
+        <div class="skill-chip skill-chip--qa" aria-hidden="true"><i class="bi bi-apple"></i><span data-i18n="skill.testios">Teste iOS</span></div>
+        <div class="skill-chip skill-chip--qa" aria-hidden="true"><i class="bi bi-arrow-repeat"></i><span data-i18n="skill.regression">Regressão</span></div>
+        <div class="skill-chip skill-chip--qa" aria-hidden="true"><i class="bi bi-search"></i><span data-i18n="skill.exploratory">Exploratório</span></div>
+        <div class="skill-chip skill-chip--qa" aria-hidden="true"><i class="bi bi-kanban"></i><span data-i18n="skill.agile">Scrum / Kanban</span></div>
         <div class="skill-chip" aria-hidden="true"><img src="./assets/habilidades/html.png" alt="" /><span>HTML5</span></div>
         <div class="skill-chip" aria-hidden="true"><img src="./assets/habilidades/css.png" alt="" /><span>CSS3</span></div>
         <div class="skill-chip" aria-hidden="true"><img src="./assets/habilidades/js.png" alt="" /><span>JavaScript</span></div>
@@ -295,8 +316,8 @@
   <section class="section-projetos" id="projetos">
     <div class="container">
       <div class="section-header" data-aos="fade-up" data-aos-duration="700">
-        <span class="section-label">O que construí</span>
-        <h2 class="section-title">Projetos</h2>
+        <span class="section-label" data-i18n="proj.label">O que construí</span>
+        <h2 class="section-title" data-i18n="proj.title">Projetos</h2>
       </div>
 
       <div class="row g-4" data-aos="fade-up" data-aos-duration="700" data-aos-delay="100">
@@ -349,7 +370,7 @@
     <div class="container">
       <div class="footer-inner" data-aos="fade-up" data-aos-duration="700">
         <p class="footer-name">Lucas Straub</p>
-        <p class="footer-role">QA Manual · Front-end Developer</p>
+        <p class="footer-role" data-i18n="footer.role">QA Manual · Front-end Developer</p>
         <div class="footer-links">
           <a href="https://www.linkedin.com/in/lucasstraub/" target="_blank" rel="noopener" aria-label="LinkedIn" class="footer-link footer-link--linkedin">
             <i class="bi bi-linkedin"></i>
@@ -364,7 +385,7 @@
             <i class="bi bi-whatsapp"></i>
           </a>
         </div>
-        <p class="footer-copy">© 2025 · Desenvolvido por Lucas Straub</p>
+        <p class="footer-copy" data-i18n="footer.copy">© 2025 · Desenvolvido por Lucas Straub</p>
       </div>
     </div>
   </footer>
@@ -378,13 +399,13 @@
           <h5 id="modalMarinhaLabel"><i class="bi bi-award-fill me-2"></i>Marinha do Brasil</h5>
           <button type="button" class="modal-traj__close" data-bs-dismiss="modal" aria-label="Fechar"><i class="bi bi-x-lg"></i></button>
         </div>
-        <div class="modal-body modal-traj__body">
+        <div class="modal-body modal-traj__body" data-i18n="modal.marinha.body">
           Servi 3 anos à Marinha do Brasil no corpo de Fuzileiros Navais, tendo comigo o aprendizado de
           hierarquia e disciplina e costumes militares. Atuei a maior parte da minha trajetória na Seção
           de Pessoal do Batalhão, onde tive responsabilidade pelos demais soldados do setor.
         </div>
         <div class="modal-traj__footer">
-          <button type="button" class="btn btn-outline-custom-sm" data-bs-dismiss="modal">Fechar</button>
+          <button type="button" class="btn btn-outline-custom-sm" data-bs-dismiss="modal" data-i18n="modal.close">Fechar</button>
         </div>
       </div>
     </div>
@@ -398,11 +419,11 @@
           <button type="button" class="modal-traj__close" data-bs-dismiss="modal" aria-label="Fechar"><i class="bi bi-x-lg"></i></button>
         </div>
         <div class="modal-body modal-traj__body">
-          <p>Em infraestrutura de redes: passagem de cabos, mapeamento de redes e suporte na instalação de roteadores.</p>
-          <p class="mb-0">Em suporte: participação na gerência dos servidores AD (Active Directory), DNS e virtualização VMWare, formatação e manutenção de computadores, instalação e configuração de softwares.</p>
+          <p data-i18n="modal.coppead.p1">Em infraestrutura de redes: passagem de cabos, mapeamento de redes e suporte na instalação de roteadores.</p>
+          <p class="mb-0" data-i18n="modal.coppead.p2">Em suporte: participação na gerência dos servidores AD (Active Directory), DNS e virtualização VMWare, formatação e manutenção de computadores, instalação e configuração de softwares.</p>
         </div>
         <div class="modal-traj__footer">
-          <button type="button" class="btn btn-outline-custom-sm" data-bs-dismiss="modal">Fechar</button>
+          <button type="button" class="btn btn-outline-custom-sm" data-bs-dismiss="modal" data-i18n="modal.close">Fechar</button>
         </div>
       </div>
     </div>
@@ -415,14 +436,14 @@
           <h5 id="modalInterligadosLabel"><i class="bi bi-bug-fill me-2 text-accent"></i>Interligados</h5>
           <button type="button" class="modal-traj__close" data-bs-dismiss="modal" aria-label="Fechar"><i class="bi bi-x-lg"></i></button>
         </div>
-        <div class="modal-body modal-traj__body">
+        <div class="modal-body modal-traj__body" data-i18n="modal.interligados.body">
           Responsável por realizar testes manuais em sistemas em desenvolvimento, identificando e registrando falhas
           com clareza e precisão. Apoio à equipe de front-end na correção de bugs e construção de interfaces.
           Participação em times ágeis (Scrum e Kanban) usando a ferramenta Taiga para acompanhar tarefas.
           Auxílio no controle de horas, cronogramas e atividades das equipes.
         </div>
         <div class="modal-traj__footer">
-          <button type="button" class="btn btn-outline-custom-sm" data-bs-dismiss="modal">Fechar</button>
+          <button type="button" class="btn btn-outline-custom-sm" data-bs-dismiss="modal" data-i18n="modal.close">Fechar</button>
         </div>
       </div>
     </div>
@@ -432,16 +453,16 @@
     <div class="modal-dialog modal-dialog-centered modal-traj">
       <div class="modal-content modal-traj__content">
         <div class="modal-traj__header">
-          <h5 id="modalInEventLabel"><i class="bi bi-bug-fill me-2 text-accent"></i>InEvent <span class="badge-modal-qa">QA Júnior · Atual</span></h5>
+          <h5 id="modalInEventLabel"><i class="bi bi-bug-fill me-2 text-accent"></i>InEvent <span class="badge-modal-qa" data-i18n="traj.inevent.badge">QA Júnior · Atual</span></h5>
           <button type="button" class="modal-traj__close" data-bs-dismiss="modal" aria-label="Fechar"><i class="bi bi-x-lg"></i></button>
         </div>
-        <div class="modal-body modal-traj__body">
+        <div class="modal-body modal-traj__body" data-i18n="modal.inevent.body">
           Atuando como QA Júnior na InEvent, plataforma global de gestão de eventos. Responsável pela execução de
           testes manuais, identificação e reporte de bugs, validação de fluxos e apoio à equipe de desenvolvimento
           na garantia da qualidade das entregas.
         </div>
         <div class="modal-traj__footer">
-          <button type="button" class="btn btn-outline-custom-sm" data-bs-dismiss="modal">Fechar</button>
+          <button type="button" class="btn btn-outline-custom-sm" data-bs-dismiss="modal" data-i18n="modal.close">Fechar</button>
         </div>
       </div>
     </div>
@@ -449,6 +470,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="./scripts/i18n.js"></script>
   <script src="./scripts/script.js"></script>
 </body>
 

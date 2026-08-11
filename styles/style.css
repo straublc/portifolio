@@ -1174,3 +1174,167 @@ footer {
 @media (min-width: 992px) {
   .hero-img { height: 480px; max-width: 400px; }
 }
+
+/* ============================================
+   SELETOR DE IDIOMA — DESKTOP
+   ============================================ */
+.lang-switcher {
+  position: relative;
+}
+
+.lang-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--surface-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.35rem 0.75rem;
+  cursor: pointer;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: border-color 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+
+.lang-btn:hover {
+  border-color: var(--border-hover);
+  background: var(--surface-4);
+  color: var(--text-primary);
+}
+
+.lang-flag { font-size: 1rem; line-height: 1; }
+.lang-code { font-family: var(--font-heading); letter-spacing: 0.05em; }
+
+.lang-chevron {
+  font-size: 0.7rem;
+  transition: transform 0.25s ease;
+  color: var(--text-muted);
+}
+
+.lang-chevron--open { transform: rotate(180deg); }
+
+/* Dropdown */
+.lang-dropdown {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 0.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 140px;
+  opacity: 0;
+  transform: translateY(-6px);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 200;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+
+.lang-dropdown--open {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.lang-option {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+
+.lang-option span { font-size: 1.1rem; }
+
+.lang-option:hover {
+  background: var(--surface-3);
+  color: var(--text-primary);
+}
+
+.lang-option--active {
+  background: rgba(124,58,237,0.15);
+  color: var(--accent-light);
+}
+
+/* ============================================
+   SELETOR DE IDIOMA — MOBILE (no drawer)
+   ============================================ */
+.lang-mobile-group {
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+}
+
+.lang-mobile-label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.lang-mobile-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.lang-mobile-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: none;
+  border: none;
+  padding: 0.5rem 0.25rem;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: background 0.15s;
+  width: 100%;
+  text-align: left;
+}
+
+.lang-mobile-item:hover {
+  background: var(--surface-3);
+}
+
+.lang-mobile-flag {
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+.lang-mobile-name {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: color 0.15s;
+}
+
+.lang-mobile-item:hover .lang-mobile-name {
+  color: var(--text-primary);
+}
+
+.lang-mobile-item.lang-opt-mobile--active .lang-mobile-name {
+  color: var(--accent-light);
+}
+
+.lang-mobile-item.lang-opt-mobile--active {
+  background: rgba(124,58,237,0.08);
+}
