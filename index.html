@@ -20,7 +20,7 @@
   <!-- Navbar -->
   <nav class="navbar navbar-expand-md navbar-dark" id="mainNav">
     <div class="container d-flex justify-content-between align-items-center">
-      <span class="logo">STRAUB</span>
+      <a href="#" class="logo" aria-label="Ir ao topo">STRAUB</a>
 
       <!-- Botão hamburguer animado (só mobile) -->
       <button class="hamburger d-md-none" type="button" id="openMenu" aria-label="Abrir menu" aria-expanded="false">
@@ -182,60 +182,62 @@
         <h2 class="section-title">Trajetória</h2>
       </div>
 
-      <div class="row justify-content-center g-4 trajetoria-cards-wrapper" data-aos="fade-up" data-aos-duration="700" data-aos-delay="100">
+      <div class="traj-scroll-wrapper" id="trajScroll">
+        <div class="traj-scroll-track">
 
-        <div class="col-12 col-md-4 d-flex justify-content-center trajetoria-card">
-          <div class="traj-card" data-bs-toggle="modal" data-bs-target="#modalMarinha" role="button" tabindex="0" aria-label="Ver detalhes da Marinha do Brasil">
-            <div class="traj-card__img-wrap">
-              <img src="./assets/trajetoria/marinha.png" class="img-fluid" alt="Marinha do Brasil">
-            </div>
-            <div class="traj-card__body">
-              <h5 class="traj-card__title">Marinha do Brasil</h5>
-              <span class="traj-card__hint">Ver mais <i class="bi bi-arrow-right"></i></span>
+          <div class="traj-scroll-item">
+            <div class="traj-card" data-bs-toggle="modal" data-bs-target="#modalMarinha" role="button" tabindex="0" aria-label="Ver detalhes da Marinha do Brasil">
+              <div class="traj-card__img-wrap">
+                <img src="./assets/trajetoria/marinha.png" class="img-fluid" alt="Marinha do Brasil">
+              </div>
+              <div class="traj-card__body">
+                <h5 class="traj-card__title">Marinha do Brasil</h5>
+                <span class="traj-card__hint">Ver mais <i class="bi bi-arrow-right"></i></span>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="col-12 col-md-4 d-flex justify-content-center trajetoria-card">
-          <div class="traj-card" data-bs-toggle="modal" data-bs-target="#modalCoppead" role="button" tabindex="0" aria-label="Ver detalhes do Coppead UFRJ">
-            <div class="traj-card__img-wrap">
-              <img src="./assets/trajetoria/coppead-ufrj.png" class="img-fluid" alt="Coppead UFRJ">
-            </div>
-            <div class="traj-card__body">
-              <h5 class="traj-card__title">Coppead UFRJ</h5>
-              <span class="traj-card__hint">Ver mais <i class="bi bi-arrow-right"></i></span>
+          <div class="traj-scroll-item">
+            <div class="traj-card" data-bs-toggle="modal" data-bs-target="#modalCoppead" role="button" tabindex="0" aria-label="Ver detalhes do Coppead UFRJ">
+              <div class="traj-card__img-wrap">
+                <img src="./assets/trajetoria/coppead-ufrj.png" class="img-fluid" alt="Coppead UFRJ">
+              </div>
+              <div class="traj-card__body">
+                <h5 class="traj-card__title">Coppead UFRJ</h5>
+                <span class="traj-card__hint">Ver mais <i class="bi bi-arrow-right"></i></span>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="col-12 col-md-4 d-flex justify-content-center trajetoria-card">
-          <div class="traj-card" data-bs-toggle="modal" data-bs-target="#modalInterligados" role="button" tabindex="0" aria-label="Ver detalhes da Interligados">
-            <div class="traj-card__img-wrap">
-              <img src="./assets/trajetoria/interligados.png" class="img-fluid" alt="Interligados">
-            </div>
-            <div class="traj-card__body">
-              <h5 class="traj-card__title">Interligados</h5>
-              <span class="traj-card__hint">Ver mais <i class="bi bi-arrow-right"></i></span>
+          <div class="traj-scroll-item">
+            <div class="traj-card" data-bs-toggle="modal" data-bs-target="#modalInterligados" role="button" tabindex="0" aria-label="Ver detalhes da Interligados">
+              <div class="traj-card__img-wrap">
+                <img src="./assets/trajetoria/interligados.png" class="img-fluid" alt="Interligados">
+              </div>
+              <div class="traj-card__body">
+                <h5 class="traj-card__title">Interligados</h5>
+                <span class="traj-card__hint">Ver mais <i class="bi bi-arrow-right"></i></span>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="col-12 col-md-4 d-flex justify-content-center trajetoria-card">
-          <div class="traj-card traj-card--highlight" data-bs-toggle="modal" data-bs-target="#modalInEvent" role="button" tabindex="0" aria-label="Ver detalhes da InEvent">
-            <div class="traj-card__img-wrap traj-card__img-wrap--logo">
-              <img src="./assets/trajetoria/inevent.png" class="img-fluid traj-logo-img" alt="InEvent">
-            </div>
-            <div class="traj-card__body">
-              <h5 class="traj-card__title">InEvent</h5>
-              <span class="traj-card__badge">QA Júnior · Atual</span>
-              <span class="traj-card__hint">Ver mais <i class="bi bi-arrow-right"></i></span>
+          <div class="traj-scroll-item">
+            <div class="traj-card traj-card--highlight" data-bs-toggle="modal" data-bs-target="#modalInEvent" role="button" tabindex="0" aria-label="Ver detalhes da InEvent">
+              <div class="traj-card__img-wrap traj-card__img-wrap--logo">
+                <img src="./assets/trajetoria/inevent.png" class="img-fluid traj-logo-img" alt="InEvent">
+              </div>
+              <div class="traj-card__body">
+                <h5 class="traj-card__title">InEvent</h5>
+                <span class="traj-card__badge">QA Júnior · Atual</span>
+                <span class="traj-card__hint">Ver mais <i class="bi bi-arrow-right"></i></span>
+              </div>
             </div>
           </div>
-        </div>
 
+        </div>
       </div>
 
-      <div class="dots-container"></div>
+      <div class="dots-container" id="trajDots"></div>
     </div>
   </section>
 

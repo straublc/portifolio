@@ -74,69 +74,42 @@ window.addEventListener('scroll', () => {
 });
 
 // ============================================
-// TRAJETÓRIA — carrossel mobile com dots
+// TRAJETÓRIA — dots sincronizados com scroll snap
 // ============================================
-function debounce(func, wait) {
-  let timeout;
-  return function (...args) {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => func.apply(this, args), wait);
-  };
-}
-
 document.addEventListener('DOMContentLoaded', () => {
-  const cards = document.querySelectorAll('.trajetoria-card');
-  const dotsContainer = document.querySelector('.dots-container');
-  if (!dotsContainer || !cards.length) return;
+  const wrapper  = document.getElementById('trajScroll');
+  const dotsContainer = document.getElementById('trajDots');
+  if (!wrapper || !dotsContainer) return;
 
-  let currentIndex = 0;
+  const items = wrapper.querySelectorAll('.traj-scroll-item');
 
-  cards.forEach((_, i) => {
+  // Cria dots
+  items.forEach((_, i) => {
     const dot = document.createElement('div');
     dot.classList.add('dot');
     if (i === 0) dot.classList.add('active');
-    dot.setAttribute('aria-label', `Card ${i + 1}`);
+    dot.setAttribute('aria-label', `Item ${i + 1}`);
+    // Clicar no dot faz scroll suave até o item
     dot.addEventListener('click', () => {
-      currentIndex = i;
-      updateCarousel();
+      items[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
     });
     dotsContainer.appendChild(dot);
   });
 
   const dots = dotsContainer.querySelectorAll('.dot');
 
-  function updateCarousel() {
-    cards.forEach((card, i) => card.classList.toggle('active', i === currentIndex));
-    dots.forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
-  }
+  // IntersectionObserver: marca o dot do card mais visível
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+        const idx = Array.from(items).indexOf(entry.target);
+        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+      }
+    });
+  }, {
+    root: wrapper,
+    threshold: 0.5
+  });
 
-  function checkViewport() {
-    if (window.innerWidth <= 767) {
-      if (currentIndex >= cards.length) currentIndex = 0;
-      updateCarousel();
-    } else {
-      cards.forEach(card => {
-        card.classList.add('active');
-        card.style.opacity = '1';
-      });
-    }
-  }
-
-  window.addEventListener('resize', debounce(checkViewport, 150));
-  checkViewport();
-
-  // Swipe mobile
-  let touchStartX = 0;
-  dotsContainer.parentElement.addEventListener('touchstart', e => {
-    touchStartX = e.changedTouches[0].screenX;
-  }, { passive: true });
-
-  dotsContainer.parentElement.addEventListener('touchend', e => {
-    const diff = touchStartX - e.changedTouches[0].screenX;
-    if (Math.abs(diff) > 40) {
-      if (diff > 0 && currentIndex < cards.length - 1) currentIndex++;
-      else if (diff < 0 && currentIndex > 0) currentIndex--;
-      updateCarousel();
-    }
-  }, { passive: true });
+  items.forEach(item => observer.observe(item));
 });

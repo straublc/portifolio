@@ -89,6 +89,12 @@ a { text-decoration: none; color: inherit; }
   font-weight: 700;
   letter-spacing: 0.06em;
   color: var(--accent-light);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.logo:hover {
+  color: var(--accent-light);
 }
 
 .nav-icon {
@@ -1068,31 +1074,89 @@ footer {
 }
 
 /* ============================================
-   TRAJETÓRIA MOBILE CAROUSEL
+   TRAJETÓRIA — DESKTOP (grid normal)
    ============================================ */
-@media (max-width: 767px) {
-  .trajetoria-card {
-    display: none;
-    opacity: 0;
-    transition: opacity 0.4s ease;
+.traj-scroll-wrapper {
+  width: 100%;
+}
+
+/* Desktop: exibe como grid de 4 colunas */
+@media (min-width: 768px) {
+  .traj-scroll-wrapper {
+    overflow: visible;
   }
 
-  .trajetoria-card.active {
-    display: flex !important;
-    opacity: 1;
+  .traj-scroll-track {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+
+  .traj-scroll-item {
+    display: flex;
     justify-content: center;
   }
 
-  .dots-container { display: flex; }
-}
-
-@media (min-width: 768px) {
-  .trajetoria-card {
-    display: flex !important;
-    opacity: 1 !important;
+  .traj-scroll-item .traj-card {
+    max-width: 100%;
+    width: 100%;
   }
 
-  .dots-container { display: none !important; }
+  .dots-container {
+    display: none !important;
+  }
+}
+
+/* ============================================
+   TRAJETÓRIA — MOBILE (scroll horizontal snap)
+   ============================================ */
+@media (max-width: 767px) {
+  .traj-scroll-wrapper {
+    overflow-x: auto;
+    overflow-y: visible;
+    /* scroll snap */
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    /* esconde scrollbar visual mas mantém funcionalidade */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    /* padding lateral para ver borda do próximo card */
+    padding: 0 1.5rem 0 1.5rem;
+    /* compensa o padding do container para ir de borda a borda */
+    margin: 0 -1rem;
+  }
+
+  .traj-scroll-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+
+  .traj-scroll-track {
+    display: flex;
+    gap: 1rem;
+    width: max-content;
+    /* alinha com o padding do wrapper */
+    padding: 0.25rem 0;
+  }
+
+  .traj-scroll-item {
+    scroll-snap-align: center;
+    flex-shrink: 0;
+    width: 75vw;
+    max-width: 280px;
+  }
+
+  .traj-scroll-item .traj-card {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Dots */
+  .dots-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 0.75rem; /* espaço reduzido entre cards e dots */
+    gap: 0.5rem;
+  }
 }
 
 /* ============================================
