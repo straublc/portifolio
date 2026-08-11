@@ -22,8 +22,11 @@
     <div class="container d-flex justify-content-between align-items-center">
       <span class="logo">STRAUB</span>
 
-      <button class="navbar-toggler border-0" type="button" id="openMenu" aria-label="Abrir menu">
-        <i class="bi bi-list nav-icon"></i>
+      <!-- Botão hamburguer animado (só mobile) -->
+      <button class="hamburger d-md-none" type="button" id="openMenu" aria-label="Abrir menu" aria-expanded="false">
+        <span class="hamburger__line"></span>
+        <span class="hamburger__line"></span>
+        <span class="hamburger__line"></span>
       </button>
 
       <div class="collapse navbar-collapse d-none d-md-flex justify-content-end">
@@ -38,14 +41,37 @@
     </div>
   </nav>
 
-  <!-- Menu Fullscreen Mobile -->
-  <div id="menuOverlay" class="inactive">
-    <button class="close-btn" id="closeMenu" aria-label="Fechar menu"><i class="bi bi-x"></i></button>
-    <a href="#sobre" class="overlay-link">Sobre</a>
-    <a href="#trajetoria" class="overlay-link">Trajetória</a>
-    <a href="#habilidades" class="overlay-link">Habilidades</a>
-    <a href="#projetos" class="overlay-link">Projetos</a>
-    <a href="#contato" class="overlay-link">Contato</a>
+  <!-- Menu drawer lateral (mobile) -->
+  <div id="menuOverlay" class="inactive" aria-hidden="true">
+    <div class="menu-drawer">
+      <div class="menu-drawer__header">
+        <span class="menu-drawer__logo">STRAUB</span>
+        <button class="menu-drawer__close" id="closeMenu" aria-label="Fechar menu">
+          <span class="hamburger hamburger--active">
+            <span class="hamburger__line"></span>
+            <span class="hamburger__line"></span>
+            <span class="hamburger__line"></span>
+          </span>
+        </button>
+      </div>
+
+      <nav class="menu-drawer__nav">
+        <a href="#sobre"       class="overlay-link" data-num="01">Sobre</a>
+        <a href="#trajetoria"  class="overlay-link" data-num="02">Trajetória</a>
+        <a href="#habilidades" class="overlay-link" data-num="03">Habilidades</a>
+        <a href="#projetos"    class="overlay-link" data-num="04">Projetos</a>
+        <a href="#contato"     class="overlay-link" data-num="05">Contato</a>
+      </nav>
+
+      <div class="menu-drawer__footer">
+        <a href="https://www.linkedin.com/in/lucasstraub/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+        <a href="https://github.com/straublc"              target="_blank" rel="noopener" aria-label="GitHub"><i class="bi bi-github"></i></a>
+        <a href="mailto:lucasstraub7@hotmail.com"          aria-label="E-mail"><i class="bi bi-envelope-fill"></i></a>
+        <a href="https://wa.me/5521976011899"              target="_blank" rel="noopener" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+      </div>
+    </div>
+    <!-- Backdrop -->
+    <div class="menu-backdrop" id="menuBackdrop"></div>
   </div>
 
   <!-- Hero -->

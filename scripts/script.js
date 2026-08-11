@@ -1,26 +1,39 @@
 // ============================================
-// MENU MOBILE OVERLAY
+// MENU MOBILE — DRAWER LATERAL
 // ============================================
-const openBtn    = document.getElementById('openMenu');
-const closeBtn   = document.getElementById('closeMenu');
-const menuOverlay = document.getElementById('menuOverlay');
+const openBtn      = document.getElementById('openMenu');
+const closeBtn     = document.getElementById('closeMenu');
+const menuOverlay  = document.getElementById('menuOverlay');
+const menuBackdrop = document.getElementById('menuBackdrop');
 const overlayLinks = document.querySelectorAll('#menuOverlay .overlay-link');
 
 function openMenu() {
   menuOverlay.classList.add('active');
   menuOverlay.classList.remove('inactive');
-  document.body.style.overflow = 'hidden';
+  menuOverlay.setAttribute('aria-hidden', 'false');
+  openBtn.setAttribute('aria-expanded', 'true');
+  openBtn.classList.add('hamburger--active');
+  document.documentElement.style.overflow = 'hidden'; // trava scroll no html
 }
 
 function closeMenu() {
   menuOverlay.classList.remove('active');
   menuOverlay.classList.add('inactive');
-  document.body.style.overflow = '';
+  menuOverlay.setAttribute('aria-hidden', 'true');
+  openBtn.setAttribute('aria-expanded', 'false');
+  openBtn.classList.remove('hamburger--active');
+  document.documentElement.style.overflow = '';
 }
 
 openBtn.addEventListener('click', openMenu);
 closeBtn.addEventListener('click', closeMenu);
+menuBackdrop.addEventListener('click', closeMenu);
 overlayLinks.forEach(link => link.addEventListener('click', closeMenu));
+
+// Fecha com Esc
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && menuOverlay.classList.contains('active')) closeMenu();
+});
 
 // ============================================
 // NEUTRALIZA interferência do Bootstrap nos modais
