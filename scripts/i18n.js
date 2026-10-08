@@ -30,7 +30,6 @@ const translations = {
     'traj.title':        'Trajetória',
     'traj.seemore':      'Ver mais',
     'traj.marinha.name': 'Marinha do Brasil',
-    'traj.inevent.badge':'QA Júnior · Atual',
 
     'hab.label': 'O que eu uso',
     'hab.title': 'Habilidades',
@@ -86,7 +85,6 @@ const translations = {
     'traj.title':        'Journey',
     'traj.seemore':      'See more',
     'traj.marinha.name': 'Brazilian Navy',
-    'traj.inevent.badge':'Junior QA · Current',
 
     'hab.label': 'What I use',
     'hab.title': 'Skills',
@@ -142,7 +140,6 @@ const translations = {
     'traj.title':        'Trayectoria',
     'traj.seemore':      'Ver más',
     'traj.marinha.name': 'Marina de Brasil',
-    'traj.inevent.badge':'QA Junior · Actual',
 
     'hab.label': 'Lo que uso',
     'hab.title': 'Habilidades',
