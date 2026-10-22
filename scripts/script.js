@@ -24,8 +24,7 @@ document.addEventListener('keydown', e => {
 
 // ============================================
 // LAYOUT DESKTOP
-// Fecha o menu e deixa a trajetória toda aberta (cards em grade);
-// no mobile volta a ser lista expansível com só o primeiro aberto.
+// Trajetória toda aberta no desktop; no mobile, só o primeiro item.
 // ============================================
 const desktop       = matchMedia('(min-width: 1024px)');
 const timelineItems = document.querySelectorAll('.timeline__item');
@@ -43,7 +42,6 @@ syncLayout();
 
 // ============================================
 // TEMA CLARO / ESCURO
-// Sem escolha salva, segue o sistema.
 // ============================================
 const root        = document.documentElement;
 const systemDark  = matchMedia('(prefers-color-scheme: dark)');
@@ -62,13 +60,13 @@ function syncThemeColor() {
 document.querySelectorAll('.theme-toggle').forEach(btn => {
   btn.addEventListener('click', () => {
     const next = currentTheme() === 'dark' ? 'light' : 'dark';
-    // Se a escolha coincide com o sistema, volta a seguir o sistema
+    // Escolha igual ao sistema: volta a seguir o sistema
     if (next === (systemDark.matches ? 'dark' : 'light')) {
       delete root.dataset.theme;
-      try { localStorage.removeItem('theme'); } catch (e) {}
+      try { localStorage.removeItem('theme'); } catch {}
     } else {
       root.dataset.theme = next;
-      try { localStorage.setItem('theme', next); } catch (e) {}
+      try { localStorage.setItem('theme', next); } catch {}
     }
     syncThemeColor();
   });
@@ -98,8 +96,8 @@ const sectionObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (!entry.isIntersecting) return;
     navLinks.forEach(link => {
-      link.toggleAttribute('aria-current', link.hash === `#${entry.target.id}`);
-      if (link.hasAttribute('aria-current')) link.setAttribute('aria-current', 'true');
+      if (link.hash === `#${entry.target.id}`) link.setAttribute('aria-current', 'true');
+      else link.removeAttribute('aria-current');
     });
   });
 }, { rootMargin: '-45% 0px -50% 0px' });

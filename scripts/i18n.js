@@ -249,7 +249,7 @@ function readSavedLang() {
   try {
     const saved = localStorage.getItem('lang');
     if (translations[saved]) return saved;
-  } catch (e) {}
+  } catch {}
   // Sem escolha salva, tenta o idioma do navegador
   const browser = (navigator.language || 'pt').slice(0, 2);
   return translations[browser] ? browser : 'pt';
@@ -283,7 +283,7 @@ function applyTranslations(lang, persist = true) {
   });
 
   if (persist) {
-    try { localStorage.setItem('lang', lang); } catch (e) {}
+    try { localStorage.setItem('lang', lang); } catch {}
   }
 }
 

@@ -25,7 +25,6 @@
   --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
   --radius-lg: 28px;
-  --radius-md: 18px;
   --radius-sm: 12px;
   --pill: 980px;
 
@@ -50,7 +49,7 @@
     --accent-fill:       #7c3aed;
     --accent-fill-hover: #8b5cf6;
     --accent-soft:       rgba(182, 156, 255, 0.14);
-  --segment-on:        #636366;
+    --segment-on:        #636366;
   }
 }
 
@@ -155,8 +154,6 @@ ul { list-style: none; }
   font-size: 15px;
 }
 .skip-link:focus { top: 10px; }
-
-.accent { color: var(--accent); }
 
 /* ============================================
    TIPOGRAFIA
@@ -425,9 +422,8 @@ ul { list-style: none; }
 }
 
 /* ============================================
-   SISTEMA DE LAYOUT
-   Breakpoints únicos: 734px (tablet) e 1024px (desktop).
-   Toda seção = cabeçalho padrão + grade de cards.
+   LAYOUT
+   Breakpoints: 734px, 1024px e 1280px.
    ============================================ */
 .section { padding: 80px 0; }
 
@@ -603,9 +599,6 @@ ul { list-style: none; }
   box-shadow: none;
 }
 
-/* Chips de habilidades (dentro de card)
-   Grade de colunas iguais: todos os itens alinhados à esquerda,
-   com a mesma largura e altura, em qualquer tamanho de tela. */
 .chips {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(136px, 1fr));
@@ -640,8 +633,7 @@ ul { list-style: none; }
 
 /* ============================================
    TRAJETÓRIA
-   Mobile/tablet: lista agrupada expansível.
-   Desktop: grade 2×2 de cards, tudo visível.
+   Lista expansível até 1023px; grade de cards no desktop.
    ============================================ */
 .timeline {
   background: var(--card);
@@ -775,7 +767,6 @@ ul { list-style: none; }
 .project__body .card__title { margin-bottom: 8px; }
 .project .card__text { margin-bottom: 24px; }
 
-/* "Visitar site": link de texto simples, como na Apple */
 .project__cta {
   display: inline-flex;
   align-items: center;
@@ -842,10 +833,8 @@ ul { list-style: none; }
   .social { margin-left: 0; justify-content: center; }
 }
 
-
 /* ============================================
    TELAS LARGAS (≥ 1280px)
-   Container de até 1600px; tipografia e grades crescem junto.
    ============================================ */
 @media (min-width: 1280px) {
   .section { padding: 144px 0; }
@@ -895,7 +884,6 @@ ul { list-style: none; }
 
 /* ============================================
    ANIMAÇÃO DE ENTRADA
-   Só ativa com JS, para o conteúdo nunca ficar invisível.
    ============================================ */
 .js .reveal {
   opacity: 0;
