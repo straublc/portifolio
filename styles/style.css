@@ -603,23 +603,27 @@ ul { list-style: none; }
   box-shadow: none;
 }
 
-/* Chips de habilidades (dentro de card) */
+/* Chips de habilidades (dentro de card)
+   Grade de colunas iguais: todos os itens alinhados à esquerda,
+   com a mesma largura e altura, em qualquer tamanho de tela. */
 .chips {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(136px, 1fr));
   gap: 8px;
 }
 
 .chips li {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 8px;
-  min-height: 40px;
-  padding: 0 14px 0 12px;
-  border-radius: var(--pill);
+  gap: 10px;
+  min-height: 44px;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
   background: color-mix(in srgb, var(--text) 6%, transparent);
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
+  line-height: 1.2;
+  min-width: 0;
 }
 
 .chips .icon {
@@ -630,6 +634,7 @@ ul { list-style: none; }
 .chips img {
   width: 20px;
   height: 20px;
+  flex-shrink: 0;
   object-fit: contain;
 }
 
@@ -768,7 +773,7 @@ ul { list-style: none; }
 }
 
 .project__body .card__title { margin-bottom: 8px; }
-.project .tags { margin-bottom: 24px; }
+.project .card__text { margin-bottom: 24px; }
 
 /* "Visitar site": link de texto simples, como na Apple */
 .project__cta {
