@@ -58,7 +58,7 @@ const translations = {
 
     'contact.label': 'Contato',
     'contact.title': 'Vamos conversar?',
-    'contact.text':  'Estou aberto a oportunidades em QA e desenvolvimento fullstack. Respondo rápido por e-mail ou WhatsApp.',
+    'contact.text':  'Projetos, parcerias ou uma boa conversa sobre qualidade de software e desenvolvimento. Me chama por e-mail ou WhatsApp.',
     'contact.email': 'Enviar e-mail',
 
     'footer.role': 'Analista de QA · Desenvolvedor Fullstack',
@@ -137,7 +137,7 @@ const translations = {
 
     'contact.label': 'Contact',
     'contact.title': 'Let\'s talk?',
-    'contact.text':  'I\'m open to QA and fullstack development opportunities. I reply quickly by email or WhatsApp.',
+    'contact.text':  'Projects, partnerships or a good conversation about software quality and development. Reach me by email or WhatsApp.',
     'contact.email': 'Send email',
 
     'footer.role': 'QA Analyst · Fullstack Developer',
@@ -216,7 +216,7 @@ const translations = {
 
     'contact.label': 'Contacto',
     'contact.title': '¿Hablamos?',
-    'contact.text':  'Estoy abierto a oportunidades en QA y desarrollo fullstack. Respondo rápido por correo o WhatsApp.',
+    'contact.text':  'Proyectos, alianzas o una buena charla sobre calidad de software y desarrollo. Escríbeme por correo o WhatsApp.',
     'contact.email': 'Enviar correo',
 
     'footer.role': 'Analista de QA · Desarrollador Fullstack',
