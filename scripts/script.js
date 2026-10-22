@@ -1,115 +1,112 @@
 // ============================================
-// MENU MOBILE — DRAWER LATERAL
+// MENU MOBILE
 // ============================================
-const openBtn      = document.getElementById('openMenu');
-const closeBtn     = document.getElementById('closeMenu');
-const menuOverlay  = document.getElementById('menuOverlay');
-const menuBackdrop = document.getElementById('menuBackdrop');
-const overlayLinks = document.querySelectorAll('#menuOverlay .overlay-link');
+const menuToggle = document.getElementById('menuToggle');
+const menu       = document.getElementById('menu');
 
-function openMenu() {
-  menuOverlay.classList.add('active');
-  menuOverlay.classList.remove('inactive');
-  menuOverlay.setAttribute('aria-hidden', 'false');
-  openBtn.setAttribute('aria-expanded', 'true');
-  openBtn.classList.add('hamburger--active');
-  document.documentElement.style.overflow = 'hidden'; // trava scroll no html
+function setMenu(open) {
+  menu.classList.toggle('is-open', open);
+  menu.inert = !open;
+  menuToggle.setAttribute('aria-expanded', String(open));
+  document.body.classList.toggle('is-locked', open);
+  if (open) menu.querySelector('a')?.focus({ preventScroll: true });
 }
 
-function closeMenu() {
-  menuOverlay.classList.remove('active');
-  menuOverlay.classList.add('inactive');
-  menuOverlay.setAttribute('aria-hidden', 'true');
-  openBtn.setAttribute('aria-expanded', 'false');
-  openBtn.classList.remove('hamburger--active');
-  document.documentElement.style.overflow = '';
-}
+menuToggle.addEventListener('click', () => setMenu(!menu.classList.contains('is-open')));
+menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenu(false)));
 
-openBtn.addEventListener('click', openMenu);
-closeBtn.addEventListener('click', closeMenu);
-menuBackdrop.addEventListener('click', closeMenu);
-overlayLinks.forEach(link => link.addEventListener('click', closeMenu));
-
-// Fecha com Esc
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape' && menuOverlay.classList.contains('active')) closeMenu();
-});
-
-// ============================================
-// NEUTRALIZA interferência do Bootstrap nos modais
-// Bootstrap 5 injeta overflow:hidden e padding-right inline no body
-// ao abrir modais — isso cria scrollbar duplo. Removemos via evento.
-// ============================================
-document.addEventListener('show.bs.modal', () => {
-  // Aguarda o Bootstrap aplicar os estilos e sobrescreve imediatamente
-  const observer = new MutationObserver(() => {
-    document.body.style.setProperty('overflow', 'visible', 'important');
-    document.body.style.setProperty('padding-right', '0px', 'important');
-  });
-  observer.observe(document.body, { attributes: true, attributeFilter: ['style'] });
-  // Para de observar após 300ms (tempo suficiente para o modal abrir)
-  setTimeout(() => observer.disconnect(), 300);
-});
-
-document.addEventListener('hidden.bs.modal', () => {
-  document.body.style.removeProperty('overflow');
-  document.body.style.removeProperty('padding-right');
-});
-
-// ============================================
-// AOS INIT
-// ============================================
-AOS.init({ once: true, offset: 60 });
-
-// ============================================
-// NAVBAR — scroll shrink sutil
-// ============================================
-window.addEventListener('scroll', () => {
-  const nav = document.getElementById('mainNav');
-  if (window.scrollY > 40) {
-    nav.style.background = 'rgba(10, 10, 15, 0.97)';
-  } else {
-    nav.style.background = 'rgba(10, 10, 15, 0.85)';
+  if (e.key === 'Escape' && menu.classList.contains('is-open')) {
+    setMenu(false);
+    menuToggle.focus();
   }
 });
 
 // ============================================
-// TRAJETÓRIA — dots sincronizados com scroll snap
+// LAYOUT DESKTOP
+// Fecha o menu e deixa a trajetória toda aberta (cards em grade);
+// no mobile volta a ser lista expansível com só o primeiro aberto.
 // ============================================
-document.addEventListener('DOMContentLoaded', () => {
-  const wrapper  = document.getElementById('trajScroll');
-  const dotsContainer = document.getElementById('trajDots');
-  if (!wrapper || !dotsContainer) return;
+const desktop       = matchMedia('(min-width: 1024px)');
+const timelineItems = document.querySelectorAll('.timeline__item');
 
-  const items = wrapper.querySelectorAll('.traj-scroll-item');
-
-  // Cria dots
-  items.forEach((_, i) => {
-    const dot = document.createElement('div');
-    dot.classList.add('dot');
-    if (i === 0) dot.classList.add('active');
-    dot.setAttribute('aria-label', `Item ${i + 1}`);
-    // Clicar no dot faz scroll suave até o item
-    dot.addEventListener('click', () => {
-      items[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-    });
-    dotsContainer.appendChild(dot);
+function syncLayout() {
+  if (desktop.matches) setMenu(false);
+  timelineItems.forEach((item, i) => {
+    item.open = desktop.matches || i === 0;
+    item.querySelector('summary').tabIndex = desktop.matches ? -1 : 0;
   });
+}
 
-  const dots = dotsContainer.querySelectorAll('.dot');
+desktop.addEventListener('change', syncLayout);
+syncLayout();
 
-  // IntersectionObserver: marca o dot do card mais visível
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
-        const idx = Array.from(items).indexOf(entry.target);
-        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
-      }
-    });
-  }, {
-    root: wrapper,
-    threshold: 0.5
+// ============================================
+// TEMA CLARO / ESCURO
+// Sem escolha salva, segue o sistema.
+// ============================================
+const root        = document.documentElement;
+const systemDark  = matchMedia('(prefers-color-scheme: dark)');
+const themeColors = { light: '#ffffff', dark: '#000000' };
+
+const currentTheme = () => root.dataset.theme || (systemDark.matches ? 'dark' : 'light');
+
+function syncThemeColor() {
+  const forced = root.dataset.theme;
+  document.querySelectorAll('meta[name="theme-color"]').forEach(meta => {
+    const media = meta.media.includes('dark') ? 'dark' : 'light';
+    meta.content = themeColors[forced || media];
   });
+}
 
-  items.forEach(item => observer.observe(item));
+document.querySelectorAll('.theme-toggle').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const next = currentTheme() === 'dark' ? 'light' : 'dark';
+    // Se a escolha coincide com o sistema, volta a seguir o sistema
+    if (next === (systemDark.matches ? 'dark' : 'light')) {
+      delete root.dataset.theme;
+      try { localStorage.removeItem('theme'); } catch (e) {}
+    } else {
+      root.dataset.theme = next;
+      try { localStorage.setItem('theme', next); } catch (e) {}
+    }
+    syncThemeColor();
+  });
 });
+
+syncThemeColor();
+
+// ============================================
+// ANIMAÇÃO DE ENTRADA
+// ============================================
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    entry.target.classList.add('is-visible');
+    revealObserver.unobserve(entry.target);
+  });
+}, { rootMargin: '0px 0px -10% 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// ============================================
+// LINK ATIVO NA NAVEGAÇÃO
+// ============================================
+const navLinks = document.querySelectorAll('.nav__links a');
+
+const sectionObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    navLinks.forEach(link => {
+      link.toggleAttribute('aria-current', link.hash === `#${entry.target.id}`);
+      if (link.hasAttribute('aria-current')) link.setAttribute('aria-current', 'true');
+    });
+  });
+}, { rootMargin: '-45% 0px -50% 0px' });
+
+document.querySelectorAll('main section[id]').forEach(section => sectionObserver.observe(section));
+
+// ============================================
+// ANO NO RODAPÉ
+// ============================================
+document.getElementById('year').textContent = new Date().getFullYear();

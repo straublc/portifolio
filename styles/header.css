@@ -1,6 +1,0 @@
-/* header.css — estilos complementares da navbar */
-/* Toda a lógica principal está em style.css */
-
-.navbar-toggler:focus {
-  box-shadow: none;
-}
