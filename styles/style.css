@@ -462,7 +462,6 @@ ul { list-style: none; }
 
 @media (min-width: 734px) {
   .grid { gap: 24px; }
-  .grid--2,
   .grid--3 { grid-template-columns: repeat(2, 1fr); }
   .grid--3 > :first-child { grid-column: 1 / -1; }
   .card { padding: 32px; }
@@ -843,7 +842,6 @@ ul { list-style: none; }
   .section__header { margin-bottom: 80px; }
 
   .grid { gap: 32px; }
-  .grid--2 { grid-template-columns: repeat(4, 1fr); }
   .card { padding: 40px; }
   .card__title { font-size: 28px; }
   .card__title--sm { font-size: 24px; }
